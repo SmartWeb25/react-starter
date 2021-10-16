@@ -1,0 +1,19 @@
+.home {
+  box-sizing: border-box; 
+  width: 100vw; 
+  height: 100vh; 
+  background-image: url(./../assets/images/home.jpg); 
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center center; 
+  padding-top: 64px;
+  padding-bottom: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .overlay-box {
+    background-color: rgba(255,255,255, .6); 
+    padding: 24px; 
+    border-radius: 8px;
+  }
+}
