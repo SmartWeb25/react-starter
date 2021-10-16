@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# React Starter
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Material ui is used and added Sign in and  Sign up template. 
+React dom router is used for navigation. 
+
+* I will keep it as simple as possible. 
 
 ## Available Scripts
 
