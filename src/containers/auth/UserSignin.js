@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,34 +14,30 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 
+import {login} from './../../redux/auth';
 
-
-export default function UserSignin() {
+function UserSignin({login, auth}) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
+    login({
       email: data.get('email'),
       password: data.get('password'),
     });
   };
-
+  console.log("auth: ", auth)
   return (
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ height: '100vh' }} className="user-signin">
         <CssBaseline />
         <Grid
+          className="side-img"
           item
           xs={false}
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random)',
-            backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -59,6 +57,7 @@ export default function UserSignin() {
               Sign in
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              {auth.errorMessage !== "" ? <p>{auth.errorMessage}</p> : null}
               <TextField
                 margin="normal"
                 required
@@ -109,3 +108,20 @@ export default function UserSignin() {
       </Grid>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    login
+  }, dispatch)
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(UserSignin);

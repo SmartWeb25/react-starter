@@ -7,13 +7,16 @@ import {
 import './styles/main.scss';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+
 import UserSignup from './containers/auth/UserSignup'; 
 import UserSignin from './containers/auth/UserSignin'; 
 import Home from './containers/public/Home'; 
 const theme = createTheme();
-console.log('theme: ', theme); 
+
 function App() {
-  return (
+  return (<Provider store={store}>
     <ThemeProvider theme={theme}>
       <Router>
         <div>
@@ -31,7 +34,7 @@ function App() {
         </div>
       </Router>
     </ThemeProvider>
-  );
+  </Provider>);
 }
 
 export default App;
